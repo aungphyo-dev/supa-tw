@@ -1,9 +1,14 @@
-import React from 'react';
+import {Leftsidebar} from "~/components";
 
 const Home = () => {
+
     return (
-        <div>
-            Min ga lar par pya
+        <div className="w-full h-full flex justify-center items-center relative">
+            <div className='max-w-screen-xl w-full h-full flex relative'>
+                <Leftsidebar/>
+                <main></main>
+                <section></section>
+            </div>
         </div>
     );
 };
