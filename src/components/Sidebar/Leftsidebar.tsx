@@ -4,8 +4,8 @@ import {NAVIGATION_ITEMS} from "~/constants/navitems";
 
 const Leftsidebar = () => {
     return (
-        <section className='fixed w-72 flex flex-col items-stretch h-screen px-5'>
-            <div className='h-full flex items-stretch flex-col space-y-4 my-4'>
+        <section className='sticky top-0 w-full flex flex-col items-stretch h-screen px-5 overflow-y-auto'>
+            <div className='flex-1 flex items-stretch flex-col space-y-4 my-4'>
                 <Link href={"/"} className='text-2xl text-gray-50 px-6 py-2'>
                     <BsTwitter/>
                 </Link>
@@ -14,7 +14,7 @@ const Leftsidebar = () => {
                         <div>
                             <nav.icon/>
                         </div>
-                        <div>
+                        <div className='text-xl'>
                             {nav.title}
                         </div>
                     </Link>)
