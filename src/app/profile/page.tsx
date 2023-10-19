@@ -6,7 +6,7 @@ const Profile = () => {
     return (
         <main className='w-full md:border-x-[0.5px] border-gray-600'>
             <div className="w-full min-h-screen">
-                <div className='font-semibold text-gray-50 text-xl sticky top-0 bg-black z-[100000] backdrop-blur bg-black/10 border-b-[0.5px] border-b-gray-600 py-3 px-2 md:px-5'>
+                <div className='font-semibold text-gray-50 text-xl sticky top-0 bg-black z-[100000] backdrop-blur bg-black/80 border-b-[0.5px] border-b-gray-600 py-3 px-2 md:px-5'>
                     <div className='w-fit flex justify-center items-center gap-x-2'>
                         <Link href={"/"} className='text-xl text-white hover:bg-white/20 p-3 rounded-full'>
                             <BiArrowBack/>

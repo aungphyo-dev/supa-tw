@@ -6,11 +6,11 @@ import {IoShareOutline} from "react-icons/io5";
 
 const Tweetcard = () => {
     return (
-        <div className="w-full flex gap-x-2 md:gap-x-5 lg:gap-x-9 px-2 md:px-5 py-5 border-b-[0.5px] border-b-gray-600">
+        <div className="w-full flex gap-x-2 md:gap-x-5 px-2 md:px-5 py-5 border-b-[0.5px] border-b-gray-600">
             <div className='w-[40px] h-[40px] rounded-full bg-white'></div>
             <div className="flex-1">
                 <div className="w-full flex justify-between items-start text-white mb-3">
-                    <div className="flex flex-col md:flex-row justify-start items-start md:items-center gap-2">
+                    <div className="flex flex-row justify-start items-center gap-2 overflow-hidden">
                         <div className='text-sm font-semibold'>
                             Userblabla
                         </div>
