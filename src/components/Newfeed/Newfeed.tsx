@@ -4,7 +4,7 @@ import {Tweetcard} from "~/components";
 
 const Newfeed = () => {
     return (
-        <main className='w-full border-x-[0.5px] border-gray-600'>
+        <main className='w-full md:border-x-[0.5px] border-gray-600'>
             <div className="w-full min-h-screen pt-2">
                 <div className='font-semibold text-gray-50 text-xl pt-5 sticky top-0 bg-black z-[100000] backdrop-blur bg-black/10 border-b-[0.5px] border-b-gray-600'>
                     <div className='px-2 md:px-5'>Home</div>

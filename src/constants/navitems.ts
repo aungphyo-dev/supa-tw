@@ -1,10 +1,6 @@
-import {BiBookmark, BiHomeCircle, BiMessage, BiNotification, BiSearch, BiUser} from "react-icons/bi";
+import {BiBookmark, BiMessage, BiNotification, BiSearch, BiUser} from "react-icons/bi";
 
 const NAVIGATION_ITEMS = [
-    {
-        title:"Home",
-        icon:BiHomeCircle
-    },
     {
         title:"Explore",
         icon:BiSearch

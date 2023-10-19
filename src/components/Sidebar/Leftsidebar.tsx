@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {BsThreeDots, BsTwitter} from "react-icons/bs";
 import {NAVIGATION_ITEMS} from "~/constants/navitems";
+import {BiHome} from "react-icons/bi";
 
 const Leftsidebar = () => {
     return (
@@ -8,6 +9,14 @@ const Leftsidebar = () => {
             <div className='flex-1 flex items-center md:items-stretch flex-col space-y-4 my-4'>
                 <Link href={"/"} className='text-2xl text-gray-50 px-2 md:px-6 py-2'>
                     <BsTwitter/>
+                </Link>
+                <Link className='text-gray-50 text-2xl space-x-4 hover:bg-white/50 transition flex justify-start w-fit items-center rounded-full md:rounded-3xl py-2 px-2 md:px-6' href="/">
+                    <div>
+                        <BiHome/>
+                    </div>
+                    <div className='text-xl hidden md:block'>
+                        Home
+                    </div>
                 </Link>
                 {
                     NAVIGATION_ITEMS.map(nav => <Link className='text-gray-50 text-2xl space-x-4 hover:bg-white/50 transition flex justify-start w-fit items-center rounded-full md:rounded-3xl py-2 px-2 md:px-6' href={`/${nav.title.toLowerCase()}`} key={nav.title}>
