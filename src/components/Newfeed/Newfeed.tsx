@@ -36,6 +36,24 @@ const Newfeed = () => {
                 </div>
                 <div className="w-full flex flex-col py-5 gap-y-5">
                     <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
+                    <Tweetcard/>
                 </div>
             </div>
         </main>
