@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/animejs": "^3.1.10",
     "animejs": "^3.2.1",
     "next": "13.5.5",
     "react": "^18",

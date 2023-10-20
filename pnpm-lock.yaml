@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@types/animejs':
+    specifier: ^3.1.10
+    version: 3.1.10
   animejs:
     specifier: ^3.2.1
     version: 3.2.1
@@ -276,6 +279,10 @@ packages:
     resolution: {integrity: sha512-E4KcWTpoLHqwPHLxidpOqQbcrZVgi0rsmmZXUle1jXmJfuIf/UWpczUJ7MZZ5tlxytgJXyp0w4PGkkeLiuIdZw==}
     dependencies:
       tslib: 2.6.2
+    dev: false
+
+  /@types/animejs@3.1.10:
+    resolution: {integrity: sha512-nCCSfdw7Ut/XwGSmkfh3nQJXKTnGe5wAhXoTBjMoGkBszbS7RYCxjggmZCAVf8mZJI4LEDTwQ7R6r7krFqPBFA==}
     dev: false
 
   /@types/json5@0.0.29:
