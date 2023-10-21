@@ -1,29 +1,28 @@
 "use client"
 import {GuestLayout} from "~/components";
 import Link from "next/link";
-import axios from "axios";
-import {useMutation} from "@tanstack/react-query";
 import {RegisterData} from "~/constants/types";
-import {useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
+import {useRegisterMutation} from "~/services/authApi";
 
 const Register = () => {
-    const [data,setData] = useState<RegisterData>({
-        name : "",
-        email : "",
-        password : "",
-        password_confirmation : ""
-    })
-    const {mutate,isError,isPending,isSuccess} = useMutation({
-        mutationKey:['post','auth','register'],
-        mutationFn:async (data:{data : RegisterData})=>{
-            const res = await axios.post("http://127.0.0.1:8000/api/auth/register",data)
-            return res.data
+    const [register,{isLoading,data}] = useRegisterMutation();
+    const [name, setName] = useState<string>("mg mg")
+    const [email, setEmail] = useState<string>("mm@gmail.com")
+    const [password, setPassword] = useState<string>("asdffdsa")
+    const [passwordConfirmation, setPasswordConfirmation] = useState<string>("asdffdsa")
+    const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+        register({name,email,password,password_confirmation : passwordConfirmation}).unwrap()
+    }
+    useEffect(() => {
+        if(!isLoading){
+            console.log(data)
         }
-    });
-    console.log(isError,isPending,isSuccess)
+    }, [isLoading,data]);
     return (
         <GuestLayout>
-            <form className='w-full h-full flex flex-col justify-center items-center  p-8'>
+            <form onSubmit={handleSubmit} className='w-full h-full flex flex-col justify-center items-center  p-8'>
                 <div className="text-xl text-white font-semibold">Register Your Account</div>
                 <div className='w-full mb-4'>
                     <label className='block w-full text-white mb-2' htmlFor="name">Name</label>
