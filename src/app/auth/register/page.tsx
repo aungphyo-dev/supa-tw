@@ -5,7 +5,6 @@ import axios from "axios";
 import {useMutation} from "@tanstack/react-query";
 import {RegisterData} from "~/constants/types";
 import {useState} from "react";
-import {string} from "postcss-selector-parser";
 
 const Register = () => {
     const [data,setData] = useState<RegisterData>({
