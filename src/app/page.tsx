@@ -1,9 +1,11 @@
-import { Newfeed} from "~/components";
+import {AuthLayout, Newfeed} from "~/components";
 
 const Home = () => {
 
     return (
-       <Newfeed/>
+       <AuthLayout>
+           <Newfeed/>
+       </AuthLayout>
     );
 };
 
