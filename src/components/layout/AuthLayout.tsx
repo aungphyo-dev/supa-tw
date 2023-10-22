@@ -1,8 +1,18 @@
 "use client"
 import {Leftsidebar, Rightsidebar} from "~/components";
-import React from "react";
+import React, {useEffect} from "react";
+import {useRouter} from "next/navigation";
+import Cookies from "js-cookie";
 
-const AuthLayout = ({children} : { children : React.ReactNode }) => {
+const AuthLayout = ({children}: { children: React.ReactNode }) => {
+    const router = useRouter()
+    const authenticated = Cookies.get("auth");
+    useEffect(() => {
+        if (!Boolean(authenticated)) {
+            router.push("/auth/login")
+        }
+        router.prefetch("/auth/login")
+    }, [router, authenticated]);
     return (
         <div className='max-w-screen-xl w-full h-full flex md:grid grid-cols-12 relative'>
             {/*Left side bar*/}
@@ -11,7 +21,7 @@ const AuthLayout = ({children} : { children : React.ReactNode }) => {
             </section>
             {/*New feed*/}
             <section className="flex-1 md:col-span-8 lg:col-span-6">
-                    {children}
+                {children}
             </section>
             {/*Right side bar*/}
             <section className='col-span-3 hidden lg:block'>

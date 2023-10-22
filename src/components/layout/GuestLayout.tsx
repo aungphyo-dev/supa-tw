@@ -1,7 +1,17 @@
 "use client"
-import React from "react";
-import Image from "next/image";
+import React, {useEffect} from "react";
+import {useRouter} from "next/navigation";
+import Cookies from "js-cookie";
 const GuestLayout = ({children}:{children:React.ReactNode}) => {
+    const router = useRouter()
+    useEffect(() => {
+        router.prefetch("/")
+        const authenticated = Cookies.get("auth");
+        if  (Boolean(authenticated)){
+            router.push("/")
+        }
+    }, [router]);
+
     return (
         <div className="w-full flex justify-center items-center">
             <main className='w-full'>

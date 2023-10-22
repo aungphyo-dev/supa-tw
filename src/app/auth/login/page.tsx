@@ -1,12 +1,12 @@
 "use client"
-import {toast, ToastContainer} from "react-toastify";
+import axios from "axios";
 import Link from "next/link";
 import {GuestLayout} from "~/components";
-import {FormEvent, useEffect, useState} from "react";
-import {useMutation} from "@tanstack/react-query";
-import axios from "axios";
 import {useRouter} from "next/navigation";
-
+import {useMutation} from "@tanstack/react-query";
+import {FormEvent, useEffect, useState} from "react";
+import {toast, ToastContainer} from "react-toastify";
+import Cookies from "js-cookie"
 const Login = () => {
     const router = useRouter()
     useEffect(() => {
@@ -15,7 +15,7 @@ const Login = () => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const userData = {email,password}
-    const {isPending,mutate,data} = useMutation({
+    const {isPending,isSuccess,mutate,data} = useMutation({
         mutationKey:["post","register","auth","user"],
         mutationFn : async (userData : any)=> {
             const res = await axios.post("http://127.0.0.1:8000/api/auth/login",userData)
@@ -41,7 +41,12 @@ const Login = () => {
             router.push("/profile")
         }
     })
-    console.log(data)
+    useEffect(() => {
+        if  (isSuccess){
+            Cookies.set('auth', JSON.stringify(data), { expires: 366 })
+        }
+    }, [isSuccess,data]);
+    console.log(data,isSuccess)
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         mutate(userData)
