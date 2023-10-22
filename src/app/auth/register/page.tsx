@@ -1,27 +1,27 @@
 "use client"
 import {GuestLayout} from "~/components";
-import {FormEvent, useEffect, useState} from "react";
-import {useRegisterMutation} from "~/services/authApi";
+import {FormEvent, useState} from "react";
 import Link from "next/link";
+import {useMutation} from "@tanstack/react-query";
+import axios from "axios";
 
 const Register = () => {
-    const [register, {isLoading, data,isError,error }] = useRegisterMutation();
     const [name, setName] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [passwordConfirmation, setPasswordConfirmation] = useState<string>("")
+    const data = {name,email,password,password_confirmation:passwordConfirmation}
+    const {isError,error,isPending,mutate} = useMutation({
+        mutationKey:["post","register","auth","user"],
+        mutationFn : async (data : any)=> {
+            const res = await axios.post("http://127.0.0.1:8000/api/auth/register",data)
+            return res.data;
+        }
+    })
+    console.log(isError,isPending,error)
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        register({name, email, password, password_confirmation: passwordConfirmation})
-    }
-    useEffect(() => {
-        if (!isLoading) {
-            console.log(data)
-        }
-    }, [isLoading, data]);
-    console.log(isLoading,data)
-    if (isError){
-        console.log(error?.data)
+        console.log({name, email, password, password_confirmation: passwordConfirmation})
     }
     return (
         <GuestLayout>
@@ -48,9 +48,6 @@ const Register = () => {
                             name="name"
                             className="p-2 mt-1 w-full rounded-md outline-none text-white border focus:border-blue-500 bg-[#16181C] text-sm shadow-sm"
                         />
-                        {
-                            (isError && error?.data?.errors.name ) && <p className='text-red-500 text-sm mt-2'>{error?.data?.errors.name[0]}</p>
-                        }
                     </div>
                     <div className="col-span-6">
                         <label htmlFor="Email" className="block text-sm font-medium text-white">
@@ -65,9 +62,6 @@ const Register = () => {
                             name="email"
                             className="p-2 mt-1 w-full rounded-md outline-none text-white border focus:border-blue-500 bg-[#16181C] text-sm shadow-sm"
                         />
-                        {
-                            (isError && error?.data?.errors.email ) && <p className='text-red-500 text-sm mt-2'>{error?.data?.errors?.email[0]}</p>
-                        }
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
@@ -86,9 +80,6 @@ const Register = () => {
                             name="password"
                             className="p-2 mt-1 w-full rounded-md outline-none text-white border focus:border-blue-500 bg-[#16181C] text-sm shadow-sm"
                         />
-                        {
-                            (isError && error?.data?.errors.password ) && <p className='text-red-500 text-sm mt-2'>{error?.data?.errors?.password[0]}</p>
-                        }
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
@@ -107,9 +98,6 @@ const Register = () => {
                             name="password_confirmation"
                             className="p-2 mt-1 w-full rounded-md outline-none text-white border focus:border-blue-500 bg-[#16181C] text-sm shadow-sm"
                         />
-                        {
-                            (isError && error?.data?.errors.password ) && <p className='text-red-500 text-sm mt-2'>{error?.data?.errors?.password[0]}</p>
-                        }
                     </div>
                     <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                         <button
