@@ -43,7 +43,7 @@ const Login = () => {
     })
     useEffect(() => {
         if  (isSuccess){
-            Cookies.set('auth', JSON.stringify(data), { expires: 366 })
+            Cookies.set('auth',data.authorization.token, { expires: 366 })
         }
     }, [isSuccess,data]);
     console.log(data,isSuccess)

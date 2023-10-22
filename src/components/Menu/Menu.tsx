@@ -34,7 +34,7 @@ const Menu = ({open,setOpen}:{
                     </Link>
                     {
                         NAVIGATION_ITEMS.map(nav=>(
-                            <Link href={nav.title} key={nav.title} className='nav-link text-gray-50 uppercase w-full py-2'>
+                            <Link href={nav.title.toLowerCase()} key={nav.title} className='nav-link text-gray-50 uppercase w-full py-2'>
                                 {nav.title}
                             </Link>
                         ))
