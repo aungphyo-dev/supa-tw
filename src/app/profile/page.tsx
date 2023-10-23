@@ -2,15 +2,16 @@
 import Link from "next/link";
 import {BiArrowBack} from "react-icons/bi";
 import {FaCalendarAlt} from "react-icons/fa";
-import {AuthLayout} from "~/components";
+import {AuthLayout, LoadingCircle} from "~/components";
 import {useQuery} from "@tanstack/react-query";
-import AXIOSC from "~/services/AXIOSC";
 import {AiOutlineLink} from "react-icons/ai";
 import Image from "next/image";
 import {CiLocationOn} from "react-icons/ci";
+import {useAuthContext} from "~/components/Context/AuthContext";
 
 
 const Profile = () => {
+    const AXIOSC = useAuthContext()
     const {data, isLoading, error} = useQuery({
         queryKey: ["get", "auth", "profile", "user"],
         queryFn: async () => {
@@ -31,9 +32,9 @@ const Profile = () => {
                             </Link>
                             <div>
                                 <div>
-                                    {data?.user?.name}
+                                    {isLoading ? <LoadingCircle/> : data?.user?.name}
                                 </div>
-                                <p className='text-sm text-gray-400'>0 Post</p>
+                                <p className='text-sm text-gray-400'>{data?.user?.tweets?.length} Post</p>
                             </div>
                         </div>
                     </div>
@@ -55,7 +56,7 @@ const Profile = () => {
                         </div>
                         <div className="w-full px-2 md:px-5">
                             <div className='w-full flex flex-col'>
-                                <h1 className='text-white font-semibold text-xl'>{data?.user?.name}</h1>
+                                <h1 className='text-white font-semibold text-xl'>{isLoading ? <LoadingCircle/> : data?.user?.name}</h1>
                                 <p className='text-sm text-gray-400'>
                                     {data?.user?.username}
                                 </p>
@@ -63,7 +64,7 @@ const Profile = () => {
                                     data?.user?.bio && <p className='text-sm text-gray-400 mt-4'>{data?.user?.bio}</p>
                                 }
                             </div>
-                            <div className="w-full flex gap-3 flex-wrap mt-3">
+                            <div className="w-full flex gap-3 flex-wrap my-3">
                                 {
                                     data?.user?.location && <div className='w-fit flex text-gray-400 text-sm justify-center items-center gap-x-2'>
                                         <CiLocationOn/>
@@ -82,10 +83,19 @@ const Profile = () => {
                                 <div className='w-fit flex text-gray-400 text-sm justify-center items-center gap-x-2'>
                                     <FaCalendarAlt/>
                                     <div>
-                                        Joined {data?.user?.created_at}
+                                        Joined {isLoading ? <LoadingCircle/> : data?.user?.created_at}
                                     </div>
                                 </div>
                             </div>
+                            <div className="w-full flex gap-3 flex-wrap my-3">
+                                <div className='w-fit flex text-gray-400 text-sm justify-center items-center gap-x-2'>
+                                        0 following
+                                    </div>
+                                <div className='w-fit flex text-gray-400 text-sm justify-center items-center gap-x-2'>
+                                    0 follower
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div className="w-full px-2 py-5 md:px-5 min-h-screen"></div>

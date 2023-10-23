@@ -6,5 +6,6 @@ import Leftsidebar from "~/components/Sidebar/Leftsidebar";
 import Rightsidebar from "~/components/Sidebar/Rightsidebar";
 import Tweetcard from "~/components/card/Tweetcard"
 import Menu from "~/components/Menu/Menu"
-
-export {AuthLayout,GuestLayout,Newfeed,NewfeedHeader,Leftsidebar,Rightsidebar,Tweetcard,Menu}
+import Logout from "~/components/Menu/Logout";
+import LoadingCircle from "~/components/Loading/LoadingCircle";
+export {AuthLayout,GuestLayout,Newfeed,NewfeedHeader,Leftsidebar,Rightsidebar,Tweetcard,Menu,Logout,LoadingCircle}

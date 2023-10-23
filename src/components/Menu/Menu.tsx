@@ -14,11 +14,11 @@ const Menu = ({open,setOpen}:{
                 height: open ? '100vh' : "0",
                 direction:"normal",
             });
-        anime({
-            targets: '.nav-link',
-            translateY: open ? "0" :"-15px",
-            delay: anime.stagger(100, {easing: 'easeOutQuad'})
-        });
+            anime({
+                targets: '.nav-link',
+                translateY: open ? "0" :"-15px",
+                delay: anime.stagger(100, {easing: 'easeOutQuad'})
+            });
     }, [open]);
     return (
         <div className={`specific-unit-values-demo h-0 w-full origin-right transition duration-500 absolute inset-0 z-[1000000] overflow-hidden  bg-black`}>
