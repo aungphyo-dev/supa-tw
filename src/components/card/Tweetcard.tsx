@@ -4,18 +4,20 @@ import {FaRegComment} from "react-icons/fa6";
 import {IoIosStats} from "react-icons/io";
 import {IoShareOutline} from "react-icons/io5";
 
-const Tweetcard = () => {
+const Tweetcard = ({tweet}:{tweet : any}) => {
     return (
         <div className="w-full flex gap-x-2 md:gap-x-5 px-2 md:px-5 py-5 border-b-[0.5px] border-b-gray-600">
-            <div className='w-[40px] h-[40px] rounded-full bg-white'></div>
+            <div className='w-[40px] h-[40px] rounded-full bg-white relative overflow-hidden'>
+                <Image src={tweet?.image ? tweet.image : "/avatar.jpg"} alt={"Avatar"} fill sizes={"500"} priority/>
+            </div>
             <div className="flex-1">
                 <div className="w-full flex justify-between items-start text-white mb-3">
                     <div className="flex flex-row justify-start items-center gap-2 overflow-hidden">
                         <div className='text-sm font-semibold'>
-                            Userblabla
+                            {tweet?.author?.name}
                         </div>
                         <div className='text-xs text-gray-300'>
-                            @username
+                            {tweet?.author?.username}
                         </div>
                         <div className='text-xs text-gray-300'>
                             Oct 14
@@ -26,11 +28,12 @@ const Tweetcard = () => {
                     </button>
                 </div>
                 <div className='text-sm text-white mb-5'>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aperiam dolorem dolores explicabo fuga ipsam laborum libero magnam numquam obcaecati quaerat quas qui reprehenderit, rerum soluta ullam veniam vero, voluptates!
+                    {tweet?.context}
                 </div>
-                <div className='relative h-[200px] md:h-[400px] w-full rounded-2xl overflow-hidden'>
-                    <Image src={"/supablog.png"} alt={"Tweet"} fill priority sizes="500" className='object-cover aspect-auto'/>
-                </div>
+                {tweet?.image && <div className='relative h-[200px] md:h-[400px] w-full rounded-2xl overflow-hidden'>
+                    <Image loading={"lazy"} src={tweet.image} alt={"Tweet"} fill priority sizes="500"
+                           className='object-cover aspect-auto'/>
+                </div>}
                 <div className="my-3 w-full flex justify-between items-center text-gray-300">
                     <div className="flex justify-start items-center gap-x-2">
                         <button>

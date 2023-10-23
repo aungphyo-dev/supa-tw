@@ -1,7 +1,6 @@
 import {AuthLayout, Newfeed} from "~/components";
 
 const Home = () => {
-
     return (
        <AuthLayout>
            <Newfeed/>

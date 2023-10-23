@@ -19,7 +19,6 @@ const Profile = () => {
             return res.data
         }
     })
-    console.log(data, isLoading, error)
     return (
         <AuthLayout>
             <main className='w-full md:border-x-[0.5px] border-gray-600'>
