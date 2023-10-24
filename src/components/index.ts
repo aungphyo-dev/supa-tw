@@ -8,4 +8,5 @@ import Tweetcard from "~/components/card/Tweetcard"
 import Menu from "~/components/Menu/Menu"
 import Logout from "~/components/Menu/Logout";
 import LoadingCircle from "~/components/Loading/LoadingCircle";
-export {AuthLayout,GuestLayout,Newfeed,NewfeedHeader,Leftsidebar,Rightsidebar,Tweetcard,Menu,Logout,LoadingCircle}
+import UserCard from "~/components/card/UserCard";
+export {AuthLayout,GuestLayout,Newfeed,NewfeedHeader,Leftsidebar,Rightsidebar,Tweetcard,Menu,Logout,LoadingCircle,UserCard}

@@ -6,16 +6,15 @@ import TextareaAutosize from "react-textarea-autosize";
 import {BiImage} from "react-icons/bi";
 import {FormEvent, useState} from "react";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {useAuthContext} from "~/components/Context/AuthContext";
 import {toast, ToastContainer} from "react-toastify";
 import Image from "next/image";
+import AXIOSC from "~/services/AXIOSC";
 
 const NewfeedHeader = () => {
     const queryClient = useQueryClient()
     const [menuOpen, setMenuOpen] = useState<boolean>(false)
     const [context, setContext] = useState<string>("")
     const [image, setImage] = useState<any>(null)
-    const AXIOSC = useAuthContext()
     const {data : user} = useQuery({
         queryKey: ["get", "auth", "profile", "user"],
         queryFn: async () => {
@@ -48,8 +47,11 @@ const NewfeedHeader = () => {
     })
     const handlePost = (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const tweet = { context ,user_id : user?.user.id }
-        mutate(tweet)
+        if(image){
+            mutate({ context ,user_id : user?.user.id ,image : image})
+        }else {
+            mutate({ context ,user_id : user?.user.id })
+        }
     }
     return (
         <>
@@ -90,7 +92,7 @@ const NewfeedHeader = () => {
                                 <label htmlFor="tweet-image" className='p-2 cursor-pointer text-xl text-blue-500 rounded-full hover:bg-white/40'>
                                     <BiImage/>
                                 </label>
-                                <input onChange={e=>setImage(e.target.value)} type="file" id='tweet-image' accept="image/jpeg,image/jpg,image/png" className='hidden'/>
+                                <input onChange={e=>setImage(e.target.files[0])} type="file" id='tweet-image' accept="image/jpeg,image/jpg,image/png" className='hidden'/>
                             </div>
                         </div>
                         <div>
