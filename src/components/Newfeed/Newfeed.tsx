@@ -1,11 +1,9 @@
 "use client"
 import {LoadingCircle, NewfeedHeader, Tweetcard} from "~/components";
-import {useAuthContext} from "~/components/Context/AuthContext";
 import {useInfiniteQuery} from "@tanstack/react-query";
-import { useState} from "react";
+import AXIOSC from "~/services/AXIOSC";
 
 const Newfeed = () => {
-    const AXIOSC = useAuthContext()
     const {data,isLoading,fetchNextPage} = useInfiniteQuery({
         queryKey : ["get","read","tweets"],
         queryFn:async ({pageParam}: {pageParam:number})=>{
@@ -17,7 +15,6 @@ const Newfeed = () => {
             return lastPage.tweets.current_page + 1
         },
     })
-    console.log(data)
     return (
         <main className='w-full md:border-x-[0.5px] border-gray-600'>
             <div className="w-full min-h-screen">
