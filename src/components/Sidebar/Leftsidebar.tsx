@@ -8,10 +8,9 @@ import {LoadingCircle, Logout} from "~/components";
 import Image from "next/image";
 import anime from "animejs";
 import {useEffect, useState} from "react";
-import {useAuthContext} from "~/components/Context/AuthContext";
+import AXIOSC from "~/services/AXIOSC";
 
 const Leftsidebar = () => {
-    const AXIOSC = useAuthContext()
     const [open, setOpen] = useState<boolean>(false)
     useEffect(() => {
         anime({
