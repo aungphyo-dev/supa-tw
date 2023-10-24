@@ -2,13 +2,12 @@ import {useMutation} from "@tanstack/react-query";
 import {useRouter} from "next/navigation";
 import {LoadingCircle} from "~/components";
 import Cookies from "js-cookie";
-import {useAuthContext} from "~/components/Context/AuthContext";
+import AXIOSC from "~/services/AXIOSC";
 
 const Logout = ({open,setOpen}:{
     open?:boolean,
     setOpen?:(open : boolean) => void
 }) => {
-    const AXIOSC = useAuthContext()
     const router = useRouter()
     const {mutate,isPending} = useMutation({
         mutationKey:["post","logout","auth","user"],
