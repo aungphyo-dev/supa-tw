@@ -7,18 +7,18 @@ import {useQuery} from "@tanstack/react-query";
 import {AiOutlineLink} from "react-icons/ai";
 import Image from "next/image";
 import {CiLocationOn} from "react-icons/ci";
-import {useAuthContext} from "~/components/Context/AuthContext";
+import AXIOSC from "~/services/AXIOSC";
 
 
 const Profile = () => {
-    const AXIOSC = useAuthContext()
-    const {data, isLoading, error} = useQuery({
+    const {data, isLoading} = useQuery({
         queryKey: ["get", "auth", "profile", "user"],
         queryFn: async () => {
             const res = await AXIOSC.get("/auth/profile")
             return res.data
         }
     })
+    console.log(data)
     return (
         <AuthLayout>
             <main className='w-full md:border-x-[0.5px] border-gray-600'>
@@ -87,12 +87,12 @@ const Profile = () => {
                                 </div>
                             </div>
                             <div className="w-full flex gap-3 flex-wrap my-3">
-                                <div className='w-fit flex text-gray-400 text-sm justify-center items-center gap-x-2'>
-                                        0 following
-                                    </div>
-                                <div className='w-fit flex text-gray-400 text-sm justify-center items-center gap-x-2'>
-                                    0 follower
-                                </div>
+                                <Link href={"/profile/following"} className='w-fit hover:underline flex text-gray-400 text-sm justify-center items-center gap-x-2'>
+                                    {!isLoading && data?.user?.followings.length + " following"}
+                                    </Link>
+                                <Link href={"/profile/followers"} className='w-fit hover:underline flex text-gray-400 text-sm justify-center items-center gap-x-2'>
+                                    {!isLoading && data?.user?.followers.length + " follower"}
+                                </Link>
                             </div>
 
                         </div>
