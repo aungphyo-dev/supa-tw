@@ -4,6 +4,7 @@ import Link from "next/link";
 import {BiArrowBack} from "react-icons/bi";
 import {useQuery} from "@tanstack/react-query";
 import AXIOSC from "~/services/AXIOSC";
+import FollowingCard from "~/components/card/FollowingCard";
 
 const ProfileFollowingPage = () => {
     const {data, isLoading} = useQuery({
@@ -29,8 +30,8 @@ const ProfileFollowingPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="min-h-screen w-full flex-1 flex flex-col gap-y-2 bg-[#202327] rounded">
-                        {data?.user?.followings?.map((user:{id:number, user : any}) => <UserCard key={user?.id} user={user}/>)}
+                    <div className="min-h-screen w-full flex-1 flex flex-col gap-y-2 rounded">
+                        {data?.user?.followings?.map((user:{id:number, user : any}) => <FollowingCard key={user?.id} user={user}/>)}
                     </div>
                 </div>
             </main>

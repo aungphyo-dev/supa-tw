@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const UserCard = ({user}:{user : any}) => {
+const FollowingCard = ({user}:{user : any}) => {
     return (
         <div className='w-full flex justify-between items-center px-5 py-3 hover:bg-white/20 cursor-pointer'>
             <div className='flex-1 flex justify-start items-start'>
@@ -8,7 +8,7 @@ const UserCard = ({user}:{user : any}) => {
                     <img src="/avatar.jpg" alt="" className='block w-full h-full'/>
                 </div>
                 <div className="ml-2">
-                    <Link href={"/"} className='text-sm text-white hover:underline'>{user.name}</Link>
+                    <Link href={`/profile/${user.id}`} className='text-sm text-white hover:underline'>{user.name}</Link>
                     <p className='text-xs text-gray-300'>@{user.username}</p>
                 </div>
             </div>
@@ -19,4 +19,4 @@ const UserCard = ({user}:{user : any}) => {
     );
 };
 
-export default UserCard;
+export default FollowingCard;

@@ -92,7 +92,7 @@ const NewfeedHeader = () => {
                                 <label htmlFor="tweet-image" className='p-2 cursor-pointer text-xl text-blue-500 rounded-full hover:bg-white/40'>
                                     <BiImage/>
                                 </label>
-                                <input onChange={e=>setImage(e.target.files[0])} type="file" id='tweet-image' accept="image/jpeg,image/jpg,image/png" className='hidden'/>
+                                <input onChange={e=>setImage(e.target.value)} type="file" id='tweet-image' accept="image/jpeg,image/jpg,image/png" className='hidden'/>
                             </div>
                         </div>
                         <div>

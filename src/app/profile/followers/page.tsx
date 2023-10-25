@@ -29,7 +29,7 @@ const ProfileFollowerPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="min-h-screen w-full flex-1 flex flex-col gap-y-2 bg-[#202327] rounded">
+                    <div className="min-h-screen w-full flex-1 flex flex-col gap-y-2  rounded">
                         {data?.user?.followers?.map((user:{id:number, user : any}) => <UserCard key={user?.id} user={user}/>)}
                     </div>
                 </div>
