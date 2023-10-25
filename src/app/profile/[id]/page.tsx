@@ -2,13 +2,14 @@
 import Link from "next/link";
 import {BiArrowBack} from "react-icons/bi";
 import {FaCalendarAlt} from "react-icons/fa";
-import {AuthLayout, LoadingCircle} from "~/components";
+import {AuthLayout, LoadingCircle, Tweetcard} from "~/components";
 import {useQuery} from "@tanstack/react-query";
 import {AiOutlineLink} from "react-icons/ai";
 import Image from "next/image";
 import {CiLocationOn} from "react-icons/ci";
 import AXIOSC from "~/services/AXIOSC";
 import {useParams} from "next/navigation";
+import {useInfiniteQuery} from "@tanstack/react-query";
 
 
 const UserProfileByID = () => {
@@ -20,6 +21,19 @@ const UserProfileByID = () => {
             return res.data
         }
     })
+    const {data:tweets,fetchNextPage,isFetchingNextPage} = useInfiniteQuery({
+        queryKey : ["get","read","tweets"],
+        queryFn:async ({pageParam}: {pageParam:number})=>{
+            const res = await AXIOSC.get(`/tweets/user/${id}?page=${pageParam}`)
+            return res.data
+        },
+        initialPageParam: 0,
+        getNextPageParam: (lastPage) => {
+            return lastPage.tweets.current_page + 1
+        },
+        enabled : Boolean(data?.user)
+
+    })
     return (
         <AuthLayout>
             <main className='w-full md:border-x-[0.5px] border-gray-600'>
@@ -27,7 +41,7 @@ const UserProfileByID = () => {
                     <div
                         className='font-semibold text-gray-50 text-xl sticky top-0 bg-black z-[100000] backdrop-blur bg-black/80 border-b-[0.5px] border-b-gray-600 py-3 px-2 md:px-5'>
                         <div className='w-fit flex justify-center items-center gap-x-2'>
-                            <Link href={"/"} className='text-xl text-white hover:bg-white/20 p-3 rounded-full'>
+                            <Link href={"/profile/following"} className='text-xl text-white hover:bg-white/20 p-3 rounded-full'>
                                 <BiArrowBack/>
                             </Link>
                             <div>
@@ -98,7 +112,24 @@ const UserProfileByID = () => {
 
                         </div>
                     </div>
-                    <div className="w-full px-2 py-5 md:px-5 min-h-screen"></div>
+                    <div className="w-ful py-5  min-h-screen border-t border-t-gray-600">
+                        {
+                            tweets?.pages.map( page =>(
+                                page.tweets.data.map((tweet : { id: number, tweet: string }) => <Tweetcard key={tweet?.id} tweet={tweet}/>)
+                            ))
+                        }
+                        <div className="w-full my-5 flex justify-center items-center">
+                            {
+                                (isLoading || isFetchingNextPage) && <LoadingCircle/>
+                            }
+                            {
+                                (!isLoading && !isFetchingNextPage && data?.pageParams && data?.pages[0].tweets.last_page !== data?.pageParams.length ) && <button onClick={() => fetchNextPage()}
+                                                                                                                                                                   className="w-full  bg-black hover:bg-white/20 py-2 text-white">
+                                    show more
+                                </button>
+                            }
+                        </div>
+                    </div>
                 </div>
             </main>
         </AuthLayout>
