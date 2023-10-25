@@ -4,7 +4,7 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 import AXIOSC from "~/services/AXIOSC";
 
 const Following = () => {
-    const {data,isLoading,fetchNextPage,error} = useInfiniteQuery({
+    const {data,isLoading,fetchNextPage,error,isFetchingNextPage} = useInfiniteQuery({
         queryKey : ["get","read","tweets","user","following"],
         queryFn:async ({pageParam}: {pageParam:number})=>{
             const res = await AXIOSC.get(`/auth/following/tweets?page=${pageParam}`)
@@ -33,11 +33,10 @@ const Following = () => {
                     </div>
                     <div className="w-full my-5 flex justify-center items-center">
                         {
-                            isLoading && <LoadingCircle/>
+                            (isLoading || isFetchingNextPage) && <LoadingCircle/>
                         }
                         {
-                            (!isLoading && data?.pageParams && data?.pages[0].tweets.last_page !== data?.pageParams.length ) && <button onClick={() => fetchNextPage()}
-                                                                                                                                        className="w-full  bg-black hover:bg-white/20 py-2 text-white">
+                            (!isLoading && !isFetchingNextPage && data?.pageParams && data?.pages[0].tweets.last_page !== data?.pageParams.length ) && <button onClick={() => fetchNextPage()} className="w-full  bg-black hover:bg-white/20 py-2 text-white">
                                 show more
                             </button>
                         }
