@@ -2,12 +2,13 @@
 import Link from "next/link";
 import {BiArrowBack} from "react-icons/bi";
 import {FaCalendarAlt} from "react-icons/fa";
-import {AuthLayout, LoadingCircle} from "~/components";
+import {AuthLayout, LoadingCircle, Tweetcard} from "~/components";
 import {useQuery} from "@tanstack/react-query";
 import {AiOutlineLink} from "react-icons/ai";
 import Image from "next/image";
 import {CiLocationOn} from "react-icons/ci";
 import AXIOSC from "~/services/AXIOSC";
+import {useInfiniteQuery} from "@tanstack/react-query";
 
 
 const Profile = () => {
@@ -16,9 +17,22 @@ const Profile = () => {
         queryFn: async () => {
             const res = await AXIOSC.get("/auth/profile")
             return res.data
-        }
+        },
+
     })
-    console.log(data)
+    const {data:tweets,fetchNextPage,isFetchingNextPage} = useInfiniteQuery({
+        queryKey : ["get","read","tweets"],
+        queryFn:async ({pageParam}: {pageParam:number})=>{
+            const res = await AXIOSC.get(`/tweets/user/${data?.user?.id}?page=${pageParam}`)
+            return res.data
+        },
+        initialPageParam: 0,
+        getNextPageParam: (lastPage) => {
+            return lastPage.tweets.current_page + 1
+        },
+        enabled : Boolean(data?.user)
+
+    })
     return (
         <AuthLayout>
             <main className='w-full md:border-x-[0.5px] border-gray-600'>
@@ -97,7 +111,24 @@ const Profile = () => {
 
                         </div>
                     </div>
-                    <div className="w-full px-2 py-5 md:px-5 min-h-screen"></div>
+                    <div className="w-ful py-5  min-h-screen border-t border-t-gray-600">
+                        {
+                            tweets?.pages.map( page =>(
+                                page.tweets.data.map((tweet : { id: number, tweet: string }) => <Tweetcard key={tweet?.id} tweet={tweet}/>)
+                            ))
+                        }
+                        <div className="w-full my-5 flex justify-center items-center">
+                            {
+                                (isLoading || isFetchingNextPage) && <LoadingCircle/>
+                            }
+                            {
+                                (!isLoading && !isFetchingNextPage && data?.pageParams && data?.pages[0].tweets.last_page !== data?.pageParams.length ) && <button onClick={() => fetchNextPage()}
+                                                                                                                                                                   className="w-full  bg-black hover:bg-white/20 py-2 text-white">
+                                    show more
+                                </button>
+                            }
+                        </div>
+                    </div>
                 </div>
             </main>
         </AuthLayout>
