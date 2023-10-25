@@ -27,7 +27,7 @@ const Rightsidebar = () => {
                     <h1 className='text-white font-semibold text-lg'>Who to follow you?</h1>
                 </div>
             </div>
-            <div className="w-full flex-1 flex flex-col gap-y-2 bg-[#202327] rounded">
+            <div className="w-full flex-1 flex flex-col rounded">
                 {data?.users?.data?.map((user:{id:number, user : any}) => <UserCard key={user?.id} user={user}/>)}
             </div>
         </div>
