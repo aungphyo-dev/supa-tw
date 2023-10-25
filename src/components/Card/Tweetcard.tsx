@@ -8,7 +8,7 @@ const Tweetcard = ({tweet}: { tweet: any }) => {
     return (
         <div className="w-full flex gap-x-2 md:gap-x-5 px-2 md:px-5 py-5 border-b-[0.5px] border-b-gray-600">
             <div className='w-[40px] h-[40px] rounded-full bg-white relative overflow-hidden'>
-                <img src={tweet?.author?.image ? `http://127.0.0.1:8000/storage/users/${tweet.author.image}` : "/avatar.jpg"} alt={"Avatar"}
+                <Image sizes={"500"} fill src={tweet?.author?.image ? `http://127.0.0.1:8000/storage/users/${tweet.author.image}` : "/avatar.jpg"} alt={"Avatar"}
                      className={"block w-full h-full"}
                 />
             </div>
@@ -33,8 +33,8 @@ const Tweetcard = ({tweet}: { tweet: any }) => {
                     {tweet?.context}
                 </div>
                 {tweet?.image && <div className='relative h-[200px] md:h-[400px] w-full rounded-2xl overflow-hidden'>
-                    <img src={tweet?.image ? `http://127.0.0.1:8000/storage/tweets/${tweet.image}` : "/avatar.jpg"} alt={"Avatar"}
-                         className={"block w-full h-full"}
+                    <Image fill sizes={"500"} src={tweet?.image ? `http://127.0.0.1:8000/storage/tweets/${tweet.image}` : "/avatar.jpg"} alt={"Avatar"}
+                         className={"object-cover"}
                     />
                 </div>}
                 <div className="my-3 w-full flex justify-between items-center text-gray-300">

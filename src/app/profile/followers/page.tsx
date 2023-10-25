@@ -13,7 +13,6 @@ const ProfileFollowerPage = () => {
             return res.data
         }
     })
-    console.log(data)
     return (
         <AuthLayout>
             <main className='w-full md:border-x-[0.5px] border-gray-600'>
@@ -29,6 +28,9 @@ const ProfileFollowerPage = () => {
                             </div>
                         </div>
                     </div>
+                    {isLoading && <div className="w-full my-5 flex justify-center items-center">
+                        <LoadingCircle/>
+                    </div>}
                     <div className="min-h-screen w-full flex-1 flex flex-col gap-y-2  rounded">
                         {data?.user?.followers?.map((user:{id:number, user : any}) => <UserCard key={user?.id} user={user}/>)}
                     </div>

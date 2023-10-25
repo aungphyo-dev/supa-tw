@@ -1,11 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const UserCard = ({user}:{user : any}) => {
     return (
         <div className='w-full flex justify-between items-center px-5 py-3  bg-[#202327]  hover:bg-white/20 cursor-pointer'>
             <div className='flex-1 flex justify-start items-start'>
-                <div className='w-[40px] h-[40px] rounded overflow-hidden'>
-                    <img src="/avatar.jpg" alt="" className='block w-full h-full'/>
+                <div className='w-[40px] h-[40px] relative rounded overflow-hidden'>
+                    <Image fill sizes={"500"} src="/avatar.jpg" alt="" className='block w-full h-full'/>
                 </div>
                 <div className="ml-2">
                     <Link href={`/profile/${user.id}`} className='text-sm text-white hover:underline'>{user.name}</Link>

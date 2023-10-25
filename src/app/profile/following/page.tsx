@@ -1,10 +1,9 @@
 "use client"
-import {AuthLayout, LoadingCircle, UserCard} from "~/components";
+import {AuthLayout, FollowingCard, LoadingCircle} from "~/components";
 import Link from "next/link";
 import {BiArrowBack} from "react-icons/bi";
 import {useQuery} from "@tanstack/react-query";
 import AXIOSC from "~/services/AXIOSC";
-import FollowingCard from "~/components/card/FollowingCard";
 
 const ProfileFollowingPage = () => {
     const {data, isLoading} = useQuery({
@@ -30,6 +29,9 @@ const ProfileFollowingPage = () => {
                             </div>
                         </div>
                     </div>
+                    {isLoading && <div className="w-full my-5 flex justify-center items-center">
+                        <LoadingCircle/>
+                    </div>}
                     <div className="min-h-screen w-full flex-1 flex flex-col gap-y-2 rounded">
                         {data?.user?.followings?.map((user:{id:number, user : any}) => <FollowingCard key={user?.id} user={user}/>)}
                     </div>

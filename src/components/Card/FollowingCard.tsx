@@ -1,11 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const FollowingCard = ({user}:{user : any}) => {
     return (
         <div className='w-full flex justify-between items-center px-5 py-3 hover:bg-white/20 cursor-pointer'>
             <div className='flex-1 flex justify-start items-start'>
-                <div className='w-[40px] h-[40px] rounded overflow-hidden'>
-                    <img src="/avatar.jpg" alt="" className='block w-full h-full'/>
+                <div className='w-[40px] h-[40px] rounded overflow-hidden relative'>
+                    <Image fill sizes={"500"} src="/avatar.jpg" alt="" className='block w-full h-full'/>
                 </div>
                 <div className="ml-2">
                     <Link href={`/profile/${user.id}`} className='text-sm text-white hover:underline'>{user.name}</Link>
