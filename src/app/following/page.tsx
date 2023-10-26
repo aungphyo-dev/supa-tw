@@ -15,7 +15,6 @@ const Following = () => {
             return lastPage.tweets.current_page + 1
         },
     })
-    console.log(data,error)
     return (
         <AuthLayout>
             <main className='w-full md:border-x-[0.5px] border-gray-600'>
