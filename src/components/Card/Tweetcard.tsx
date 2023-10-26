@@ -3,6 +3,7 @@ import {BsHeart, BsThreeDots} from "react-icons/bs";
 import {FaRegComment} from "react-icons/fa6";
 import {IoIosStats} from "react-icons/io";
 import {IoShareOutline} from "react-icons/io5";
+import Link from "next/link";
 
 const Tweetcard = ({tweet}: { tweet: any }) => {
     return (
@@ -15,9 +16,9 @@ const Tweetcard = ({tweet}: { tweet: any }) => {
             <div className="flex-1">
                 <div className="w-full flex justify-between items-start text-white mb-3">
                     <div className="flex flex-row justify-start items-center gap-2 overflow-hidden">
-                        <div className='text-sm font-semibold'>
+                        <Link href={`/profile/${tweet?.author?.id}`} className='hover:underline text-sm font-semibold'>
                             {tweet?.author?.name}
-                        </div>
+                        </Link>
                         <div className='text-xs text-gray-300'>
                             {tweet?.author?.username}
                         </div>
