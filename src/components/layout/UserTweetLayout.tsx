@@ -1,4 +1,4 @@
-import {LoadingCircle, Tweetcard} from "~/components";
+import {LoadingCircle, UserTweetCard} from "~/components";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import AXIOSC from "~/services/AXIOSC";
 
@@ -19,7 +19,7 @@ const UserTweetLayout = ({id,user}:{id : any,user : any}) => {
         <div className="w-ful py-5  min-h-screen border-t border-t-gray-600">
             {
                 tweets?.pages.map( page =>(
-                    page.tweets.data.map((tweet : { id: number, tweet: string }) => <Tweetcard key={tweet?.id} tweet={tweet}/>)
+                    page.tweets.data.map((tweet : { id: number, tweet: string }) => <UserTweetCard key={tweet?.id} tweet={tweet}/>)
                 ))
             }
             <div className="w-full my-5 flex justify-center items-center">
