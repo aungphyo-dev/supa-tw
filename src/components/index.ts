@@ -16,6 +16,6 @@ import ProfileFollowerPage from "~/app/profile/followers/page";
 import UserTweetLayout from "~/components/layout/UserTweetLayout";
 import UserProfileByID from "~/app/profile/[id]/page";
 import UserProfile from "~/components/Partials/UserProfile";
+import UserTweetCard from "~/components/Card/UserTweetCard";
 
-
-export {AuthLayout,GuestLayout,Newfeed,NewfeedHeader,Leftsidebar,Rightsidebar,Tweetcard,Menu,Logout,LoadingCircle,UserCard,FollowingCard,Following,ProfileFollowingPage,ProfileFollowerPage,UserProfile,UserProfileByID,UserTweetLayout}
+export {AuthLayout,GuestLayout,Newfeed,NewfeedHeader,Leftsidebar,Rightsidebar,Tweetcard,Menu,Logout,LoadingCircle,UserCard,FollowingCard,Following,ProfileFollowingPage,ProfileFollowerPage,UserProfile,UserProfileByID,UserTweetLayout,UserTweetCard}
