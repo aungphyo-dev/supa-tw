@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BiArrowBack } from "react-icons/bi";
@@ -6,6 +6,7 @@ import { LoadingCircle } from "~/components";
 import { CiLocationOn } from "react-icons/ci";
 import { AiOutlineLink } from "react-icons/ai";
 import { FaCalendarAlt } from "react-icons/fa";
+import UserInfoEditForm from "~/components/Partials/UserInfoEditForm";
 
 const UserProfile = ({
   user,
@@ -14,6 +15,7 @@ const UserProfile = ({
   user: any;
   isLoading: boolean;
 }) => {
+  const [edit, setEdit] = useState<boolean>(false)
   return (
     <>
       <div className="font-semibold text-gray-50 text-xl sticky top-0 bg-black z-[100000] backdrop-blur bg-black/80 border-b-[0.5px] border-b-gray-600 py-3 px-2 md:px-5">
@@ -43,9 +45,10 @@ const UserProfile = ({
               sizes={"500"}
             />
           </div>
-          <button className="text-white px-5 py-2 rounded-full border border-gray-600 mb-3">
+          <button onClick={()=>setEdit(true)} className="text-white px-5 py-2 rounded-full border border-gray-600 mb-3">
             Edit profile
           </button>
+          <UserInfoEditForm edit={edit} setEdit={setEdit}/>
         </div>
         <div className="w-full px-2 md:px-5">
           <div className="w-full flex flex-col">
