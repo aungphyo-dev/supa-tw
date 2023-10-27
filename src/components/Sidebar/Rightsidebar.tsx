@@ -6,7 +6,7 @@ import AXIOSC from "~/services/AXIOSC";
 
 const Rightsidebar = () => {
     const {data} = useQuery({
-        queryKey: ["get", "auth", "users"],
+        queryKey: ["get","users"],
         queryFn: async () => {
             const res = await AXIOSC.get("/auth/users")
             return res.data
@@ -19,7 +19,7 @@ const Rightsidebar = () => {
                     <label htmlFor="search">
                         <BsSearch className='text-xl text-white absolute left-[35px] top-[36px]'/>
                     </label>
-                    <input type="text" id='search' placeholder="Search" className='pl-[45px] placeholder:text-gray-400 w-full outline-none bg-[#202327] focus:bg-transparent rounded-full border border-[#202327] focus:border-blue-500 py-3'/>
+                    <input type="text" id='search' placeholder="Search" className='pl-[45px] text-white placeholder:text-gray-400 w-full outline-none bg-[#202327] focus:bg-transparent rounded-full border border-[#202327] focus:border-blue-500 py-3'/>
                 </div>
             </div>
             <div className="w-full   text-white mb-4 px-5">
@@ -28,7 +28,7 @@ const Rightsidebar = () => {
                 </div>
             </div>
             <div className="w-full flex-1 flex flex-col rounded">
-                {data?.data?.map((user:{id:number, user : any}) => <UserCard key={user?.id} user={user}/>)}
+                {data?.users?.map((user:{id:number, user : any}) => <UserCard key={user?.id} user={user}/>)}
             </div>
         </div>
     );
