@@ -15,7 +15,7 @@ const Login = () => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const userData = {email,password}
-    const {isPending,isSuccess,mutate,data} = useMutation({
+    const {isSuccess,mutate,data} = useMutation({
         mutationKey:["post","register","auth","user"],
         mutationFn : async (userData : any)=> {
             const res = await axios.post("http://127.0.0.1:8000/api/auth/login",userData)
@@ -44,6 +44,7 @@ const Login = () => {
     useEffect(() => {
         if  (isSuccess){
             Cookies.set('auth',data.authorization.token, { expires: 366 })
+            Cookies.set('userId',data.user.id, { expires: 366 })
         }
     }, [isSuccess,data]);
     console.log(data,isSuccess)
