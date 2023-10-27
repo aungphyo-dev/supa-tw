@@ -4,11 +4,12 @@ import {LoadingCircle, Menu} from "~/components";
 import Link from "next/link";
 import TextareaAutosize from "react-textarea-autosize";
 import {BiImage} from "react-icons/bi";
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {toast, ToastContainer} from "react-toastify";
 import Image from "next/image";
 import AXIOSC from "~/services/AXIOSC";
+import ImagePreview from "~/components/Partials/ImagePreview";
 
 const NewfeedHeader = () => {
     const queryClient = useQueryClient()
@@ -53,6 +54,8 @@ const NewfeedHeader = () => {
             mutate({ context ,user_id : user?.user.id })
         }
     }
+
+
     return (
         <>
             <div className='pt-5 sticky top-0  text-gray-50 bg-black z-[100000] backdrop-blur bg-black/80 border-b-[0.5px] border-b-gray-600'>
@@ -86,13 +89,14 @@ const NewfeedHeader = () => {
                     <div className=' border-b-[0.5px] border-b-gray-600'>
                         <TextareaAutosize required value={context} onChange={e=>setContext(e.target.value)} className='resize-none h-auto w-full text-gray-50 overflow-y-hidden placeholder:text-sm md:placeholder:text-[20px] border-none outline-none bg-transparent py-5 caret-gray-50'  placeholder={"What happening now?"} maxRows={10} maxLength={300}/>
                     </div>
+                    <ImagePreview image={image} className='h-[200px] md:h-[400px] my-2 w-full rounded-xl'/>
                     <div className="w-full flex justify-between items-center py-4">
                         <div className='flex-1'>
                             <div className='w-full flex'>
                                 <label htmlFor="tweet-image" className='p-2 cursor-pointer text-xl text-blue-500 rounded-full hover:bg-white/40'>
                                     <BiImage/>
                                 </label>
-                                <input onChange={e=>setImage(e.target.value)} type="file" id='tweet-image' accept="image/jpeg,image/jpg,image/png" className='hidden'/>
+                                <input onChange={e=>setImage(e?.target?.files?.[0])} type="file" id='tweet-image' accept="image/jpeg,image/jpg,image/png" className='hidden'/>
                             </div>
                         </div>
                         <div>
