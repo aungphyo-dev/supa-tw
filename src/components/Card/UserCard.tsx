@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import FollowButton from "~/components/Partials/FollowButton";
+import Cookies from "js-cookie";
+import UnFollowButton from "~/components/Partials/UnfollowButton";
 
 const UserCard = ({user}:{user : any}) => {
     return (
@@ -14,7 +17,10 @@ const UserCard = ({user}:{user : any}) => {
                 </div>
             </div>
             <div>
-                <button className='border text-gray-100 border-gray-500 rounded-full px-4 py-2 font-semibold text-xs'>Follow</button>
+                {
+                    Boolean(user.followers.find((follow : any)=> follow.follower_id.toString() === Cookies.get('userId')))
+                    ? <UnFollowButton unfollow_id={user.id}/> : <FollowButton follow_id={user.id}/>
+                }
             </div>
         </div>
     );
