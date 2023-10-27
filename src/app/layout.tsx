@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {useRouter} from "next/navigation";
 import {useEffect} from "react";
+import Cookies from "js-cookie";
 
 
 const inter = Inter({subsets: ['latin']})
@@ -20,7 +21,7 @@ const queryClient = new QueryClient({
         },
     },
 })
-
+const modal = Cookies.get("modal")
 export default function RootLayout({children,}: { children: React.ReactNode }) {
     return (
         <html lang="en">
