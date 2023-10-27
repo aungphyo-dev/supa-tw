@@ -3,8 +3,6 @@ import { AuthLayout, UserProfile, UserTweetLayout } from "~/components";
 import { useQuery } from "@tanstack/react-query";
 import AXIOSC from "~/services/AXIOSC";
 import Link from "next/link";
-import React from "react";
-
 const Profile = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["get", "auth", "profile", "user"],
