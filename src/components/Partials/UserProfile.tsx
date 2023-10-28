@@ -1,3 +1,4 @@
+"use client"
 import React, {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -33,11 +34,20 @@ const UserProfile = ({
         </div>
       </div>
       <div className="w-full">
-        <div className="w-full h-[240px] bg-gray-500"></div>
+        <div className="w-full h-[240px] bg-gray-500 relative">
+          {user?.cover_avatar && <Image
+              src={`http://127.0.0.1:8000/storage/users/${user?.cover_avatar}`}
+              alt={"Profile"}
+              className="object-cover"
+              priority
+              fill
+              sizes={"500"}
+          />}
+        </div>
         <div className="w-full px-2 md:px-5 mt-[-75px] mb-3 flex justify-between items-end">
           <div className="w-[150px] h-[150px] border-2 border-black rounded-full bg-gray-500 relative overflow-hidden">
             <Image
-              src={!user?.profile_avatar ? "/avatar.jpg" : user?.profile_avatar}
+              src={!user?.profile_avatar ? "/avatar.jpg" : `http://127.0.0.1:8000/storage/users/${user?.profile_avatar}`}
               alt={"Profile"}
               className="object-cover"
               priority
@@ -70,13 +80,13 @@ const UserProfile = ({
             {user?.website && (
               <div className="w-fit flex text-sm justify-center items-center gap-x-2">
                 <AiOutlineLink className="text-gray-400" />
-                <Link
+                <a
                   href={user?.website}
                   className="text-blue-500 hover:underline "
                   target={"_blank"}
                 >
                   {user?.website}
-                </Link>
+                </a>
               </div>
             )}
             <div className="w-fit flex text-gray-400 text-sm justify-center items-center gap-x-2">
